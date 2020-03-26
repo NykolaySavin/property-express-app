@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Jquery app</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+      integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">Property application</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="properties.html"
+              >Properties <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="users.html">Users</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <div id="editContainer">
+      <p><b>Edit user</b></p>
+      <table>
+        <tr>
+          <td><input type="hidden" id="editId" /></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>First Name:</td>
+          <td><input type="text" id="editFirstName" /></td>
+        </tr>
+        <tr>
+          <td>Last Name:</td>
+          <td><input type="text" id="editLastName" /></td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td><input type="text" id="editEmail" /></td>
+        </tr>
+        <tr>
+          <td>Phone:</td>
+          <td><input type="text" id="editPhone" /></td>
+        </tr>
+      </table>
+
+      <button id="editButton" class="button">Save</button>
+    </div>
+
+    <div id="createContainer">
+      <p><b>Add user</b></p>
+      <table>
+        <tr>
+          <td>First Name:</td>
+          <td><input type="text" id="createFirstName" /></td>
+        </tr>
+        <tr>
+          <td>Last Name:</td>
+          <td><input type="text" id="createLastName" /></td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td><input type="text" id="createEmail" /></td>
+        </tr>
+        <tr>
+          <td>Phone:</td>
+          <td><input type="text" id="createPhone" /></td>
+        </tr>
+      </table>
+
+      <button id="createButton" class="button">Save</button>
+    </div>
+
+    <div id="tableContainer"></div>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+      integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+      integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+      crossorigin="anonymous"
+    ></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        getUsers();
+        $("#editButton").click(function(event) {
+          event.preventDefault();
+          editUser();
+        });
+        $("#createButton").click(function(event) {
+          event.preventDefault();
+          createUser();
+        });
+      });
+      function getUsers() {
+        $("#createContainer").css("display", "block");
+        $("#editContainer").css("display", "none");
+        $.ajax({
+          url: "/v1/users",
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
+            writeResponse(data);
+          },
+          error: function(x, y, z) {
+            console.log("Error: " + x + "\n" + y + "\n" + z);
+          }
+        });
+      }
+      function createUser() {
+        var user = {
+          firstName: $("#createFirstName").val(),
+          lastName: $("#createLastName").val(),
+          email: $("#createEmail").val(),
+          phone: $("#createPhone").val()
+        };
+        $.ajax({
+          url: "/v1/users",
+          type: "POST",
+          data: JSON.stringify(user),
+          contentType: "application/json;charset=utf-8",
+          success: function(data) {
+            getUsers();
+          },
+          error: function(x, y, z) {
+            console.log("Error: " + x + "\n" + y + "\n" + z);
+          }
+        });
+      }
+      function deleteUser(id) {
+        $.ajax({
+          url: "/v1/users/" + id,
+          type: "DELETE",
+          contentType: "application/json;charset=utf-8",
+          success: function(data) {
+            getUsers();
+          },
+          error: function(x, y, z) {
+            console.log("Error: " + x + "\n" + y + "\n" + z);
+          }
+        });
+      }
+      function editUser() {
+        var id = $("#editId").val();
+        var user = {
+          id: $("#editId").val(),
+          firstName: $("#editFirstName").val(),
+          lastName: $("#editLastName").val(),
+          email: $("#editEmail").val(),
+          phone: $("#editPhone").val()
+        };
+        $.ajax({
+          url: "/v1/users/" + id,
+          type: "PUT",
+          data: JSON.stringify(user),
+          contentType: "application/json;charset=utf-8",
+          success: function(data) {
+            getUsers();
+          },
+          error: function(x, y, z) {
+            console.log("Error: " + x + "\n" + y + "\n" + z);
+          }
+        });
+      }
+      function writeResponse(users) {
+        var strResult =
+          "<table class='table' id='tableContainer'>" +
+          "<tr>" +
+          "<th>FirstName</th>" +
+          "<th>LastName</th>" +
+          "<th>Email</th>" +
+          "<th>Phone</th>" +
+          "<th></th>" +
+          "</tr>";
+        $.each(users, function(index, user) {
+          strResult +=
+            "<tr><td>" +
+            user.firstName +
+            "</td><td>" +
+            user.lastName +
+            "</td><td>" +
+            user.email +
+            "</td><td>" +
+            user.phone +
+            "</td><td>" +
+            "<a class='c' id='editItem' data-item='" +
+            user.id +
+            "' onclick='editItem(this);' >Edit</a>" +
+            " |  " +
+            "<a class='c' id='delItem' data-item='" +
+            user.id +
+            "' onclick='deleteItem(this);' >Delete</a></td>";
+          ("</tr>");
+        });
+        strResult += "</table>";
+        $("#tableContainer").html(strResult);
+      }
+      function deleteItem(el) {
+        var id = $(el).attr("data-item");
+        deleteUser(id);
+      }
+      function editItem(el) {
+        var id = $(el).attr("data-item");
+        getUser(id);
+      }
+      function showUser(user) {
+        if (user != null) {
+          $("#createContainer").css("display", "none");
+          $("#editContainer").css("display", "block");
+          $("#editId").val(user.id);
+          $("#editFirstName").val(user.firstName);
+          $("#editLastName").val(user.lastName);
+          $("#editEmail").val(user.email);
+          $("#editPhone").val(user.phone);
+        } else {
+          console.log("This is no user");
+        }
+      }
+      function getUser(id) {
+        $.ajax({
+          url: "/v1/users/" + id,
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
+            showUser(data);
+          },
+          error: function(x, y, z) {
+            console.log("Error: " + x + "\n" + y + "\n" + z);
+          }
+        });
+      }
+    </script>
+  </body>
+</html>
