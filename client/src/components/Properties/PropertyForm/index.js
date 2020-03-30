@@ -11,27 +11,27 @@ const schema = yup.object({
   ownerId: yup.string().required(),
   livingArea: yup
     .number()
-    .positive()
+    .min(0)
     .nullable(),
   buildingArea: yup
     .number()
-    .positive()
+    .min(0)
     .nullable(),
   yearAltered: yup
     .number()
-    .positive()
+    .min(0)
     .nullable(),
   yearBuilt: yup
     .number()
-    .positive()
+    .min(0)
     .nullable(),
   bathroomsTotal: yup
     .number()
-    .positive()
+    .min(0)
     .nullable(),
   bedroomsTotal: yup
     .number()
-    .positive()
+    .min(0)
     .nullable(),
   address: yup
     .object({
@@ -152,7 +152,7 @@ const PropertyForm = ({
         <Form.Control
           type="number"
           placeholder="Living area"
-          value={get(values, "livingArea") || ""}
+          value={get(values, "livingArea") || 0}
           name="livingArea"
           onChange={handleChange}
           isInvalid={!!get(errors, "livingArea")}
@@ -166,7 +166,7 @@ const PropertyForm = ({
         <Form.Control
           type="number"
           placeholder="Building area"
-          value={get(values, "buildingArea") || ""}
+          value={get(values, "buildingArea") || 0}
           name="buildingArea"
           onChange={handleChange}
           isInvalid={!!get(errors, "buildingArea")}
@@ -180,7 +180,7 @@ const PropertyForm = ({
         <Form.Control
           type="number"
           placeholder="Year built"
-          value={get(values, "yearBuilt") || ""}
+          value={get(values, "yearBuilt") || 0}
           name="yearBuilt"
           onChange={handleChange}
           isInvalid={!!get(errors, "yearBuilt")}
@@ -194,7 +194,7 @@ const PropertyForm = ({
         <Form.Control
           type="number"
           placeholder="Year altered"
-          value={get(values, "yearAltered") || ""}
+          value={get(values, "yearAltered") || 0}
           name="yearAltered"
           onChange={handleChange}
           isInvalid={!!get(errors, "yearAltered")}
@@ -208,7 +208,7 @@ const PropertyForm = ({
         <Form.Control
           type="number"
           placeholder="Number of bathrooms"
-          value={get(values, "bathroomsTotal") || ""}
+          value={get(values, "bathroomsTotal") || 0}
           name="bathroomsTotal"
           onChange={handleChange}
           isInvalid={!!get(errors, "bathroomsTotal")}
@@ -222,7 +222,7 @@ const PropertyForm = ({
         <Form.Control
           type="number"
           placeholder="Number of bedrooms"
-          value={get(values, "bedroomsTotal") || ""}
+          value={get(values, "bedroomsTotal") || 0}
           name="bedroomsTotal"
           onChange={handleChange}
           isInvalid={!!get(errors, "bedroomsTotal")}
@@ -240,7 +240,12 @@ const PropertyForm = ({
         initialValue={get(values, `ownerId`) || ""}
         title="Owner"
       />
-      <Button variant="primary" type="submit" className="mt-3 btn-focal btn-lg">
+      <Button
+        id="property-submit"
+        variant="primary"
+        type="submit"
+        className="mt-3 btn-focal btn-lg"
+      >
         Save Changes
       </Button>
     </Form>

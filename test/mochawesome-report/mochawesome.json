@@ -1,0 +1,285 @@
+{
+  "stats": {
+    "suites": 2,
+    "tests": 6,
+    "passes": 6,
+    "pending": 0,
+    "failures": 0,
+    "start": "2020-03-30T13:17:36.620Z",
+    "end": "2020-03-30T13:19:10.445Z",
+    "duration": 93825,
+    "testsRegistered": 6,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false,
+    "passPercentClass": "success",
+    "pendingPercentClass": "danger"
+  },
+  "suites": {
+    "uuid": "7bfb23e8-8f51-4efb-bb6c-a637821f7e25",
+    "title": "",
+    "fullFile": "",
+    "file": "",
+    "beforeHooks": [
+      {
+        "title": "\"before all\" hook",
+        "fullTitle": "\"before all\" hook",
+        "timedOut": false,
+        "duration": 640,
+        "pass": false,
+        "fail": false,
+        "pending": false,
+        "code": "global.expect = expect;\nglobal.browser = await puppeteer.launch(opts);",
+        "err": {},
+        "isRoot": true,
+        "uuid": "761ef119-232f-48cd-937a-1578e39687d2",
+        "isHook": true,
+        "skipped": false
+      }
+    ],
+    "afterHooks": [
+      {
+        "title": "\"after all\" hook",
+        "fullTitle": "\"after all\" hook",
+        "timedOut": false,
+        "duration": 206,
+        "pass": false,
+        "fail": false,
+        "pending": false,
+        "code": "browser.close();\nsetTimeout( () => { cmd.run('node server.js');}, 5000)\nsetTimeout(() => {opn('http://localhost:9988');}, 2000);\n // open('./mochawesome-report/mochawesome.html');\nglobal.browser = globalVariables.browser;\nglobal.expect = globalVariables.expect;",
+        "err": {},
+        "isRoot": true,
+        "uuid": "5966c45e-eb9d-4e70-91f1-11451cd9eef1",
+        "isHook": true,
+        "skipped": false
+      }
+    ],
+    "tests": [],
+    "suites": [
+      {
+        "uuid": "e071680b-f776-4952-9873-eec6b6b075f4",
+        "title": "property tests",
+        "fullFile": "C:\\Users\\Nykolay Savin\\WebstormProjects\\property-express-app\\test\\test\\properties.spec.js",
+        "file": "\\test\\properties.spec.js",
+        "beforeHooks": [
+          {
+            "title": "\"before all\" hook",
+            "fullTitle": "property tests \"before all\" hook",
+            "timedOut": false,
+            "duration": 5373,
+            "pass": false,
+            "fail": false,
+            "pending": false,
+            "code": "page = await browser.newPage();\nawait page.goto(\"http://localhost:3000\");\nawait page.setViewport({ width: 1920, height: 1040 });\nconst link = \"a.nav-link\";\nlinks = await page.$$(link);\nawait links[1].click();",
+            "err": {},
+            "isRoot": false,
+            "uuid": "3ed9374b-9b3f-4c42-b399-9e53869a9be2",
+            "isHook": true,
+            "skipped": false
+          }
+        ],
+        "afterHooks": [
+          {
+            "title": "\"after all\" hook",
+            "fullTitle": "property tests \"after all\" hook",
+            "timedOut": false,
+            "duration": 129,
+            "pass": false,
+            "fail": false,
+            "pending": false,
+            "code": "await page.close();",
+            "err": {},
+            "isRoot": false,
+            "uuid": "50ccae40-fc14-4108-b43d-f4e728d27edd",
+            "isHook": true,
+            "skipped": false
+          }
+        ],
+        "tests": [
+          {
+            "title": "should list properties",
+            "fullTitle": "property tests should list properties",
+            "timedOut": false,
+            "duration": 3660,
+            "state": "passed",
+            "speed": "slow",
+            "pass": true,
+            "fail": false,
+            "pending": false,
+            "code": "const propertyListSelector = \"#property-list\";\nawait page.waitForSelector(propertyListSelector, {\n  visible: true,\n  timeout: 0\n});\nawait page.waitFor(3000);",
+            "err": {},
+            "isRoot": false,
+            "uuid": "bc8103ef-48eb-4069-ba44-3712e2996b96",
+            "isHook": false,
+            "skipped": false
+          },
+          {
+            "title": "should create property",
+            "fullTitle": "property tests should create property",
+            "timedOut": false,
+            "duration": 21501,
+            "state": "passed",
+            "speed": "slow",
+            "pass": true,
+            "fail": false,
+            "pending": false,
+            "code": "const propertyListSelector = \"#property-list\";\nconst createLinkSelector = \"#property-create-link\";\nconst formStreetSelector = \"#formStreet\";\nconst formHouseNumberSelector = \"#formHouseNumber\";\nconst formPostcodeSelector = \"#formPostcode\";\nconst formCityDistrictSelector = \"#formCityDistrict\";\nconst formCitySelector = \"#formCity\";\nconst formCountrySelector = \"#formCountry\";\nconst formYearBuiltSelector = \"#formYearBuilt\";\nconst formYearAlteredSelector = \"#formYearAltered\";\nconst formBathroomsTotalSelector = \"#formBathroomsTotal\";\nconst formBedroomsTotalSelector = \"#formBedroomsTotal\";\nconst formLivingAreaSelector = \"#formLivingArea\";\nconst formBuildingAreaSelector = \"#formBuildingArea\";\nconst submitButtonSelector = \"#property-submit\";\nconst property = generateProperty();\nconst linkCreate = await page.$(createLinkSelector);\nawait linkCreate.click();\nconst linkStreet = await page.$(formStreetSelector);\nconst linkHouseNumber = await page.$(formHouseNumberSelector);\nconst linkPostcode = await page.$(formPostcodeSelector);\nconst linkCityDistrict = await page.$(formCityDistrictSelector);\nconst linkCity = await page.$(formCitySelector);\nconst linkCountry = await page.$(formCountrySelector);\nconst linkYearBuilt = await page.$(formYearBuiltSelector);\nconst linkYearAltered = await page.$(formYearAlteredSelector);\nconst linkBathroomsTotal = await page.$(formBathroomsTotalSelector);\nconst linkBedroomsTotal = await page.$(formBedroomsTotalSelector);\nconst linkLivingArea = await page.$(formLivingAreaSelector);\nconst linkBuildingArea = await page.$(formBuildingAreaSelector);\nconst linkSubmit = await page.$(submitButtonSelector);\nawait linkStreet.click({ clickCount: 3 });\nawait linkStreet.type(property.address.street);\nawait linkHouseNumber.click({ clickCount: 3 });\nawait linkHouseNumber.type(property.address.house_number);\nawait linkPostcode.click({ clickCount: 3 });\nawait linkPostcode.type(property.address.postcode);\nawait linkCityDistrict.click({ clickCount: 3 });\nawait linkCityDistrict.type(property.address.city_district);\nawait linkCity.click({ clickCount: 3 });\nawait linkCity.type(property.address.city);\nawait linkCountry.click({ clickCount: 3 });\nawait linkCountry.type(property.address.country);\n/* await linkYearAltered.click({ clickCount: 3 });\nawait linkYearAltered.type(property.yearAltered);\nawait linkYearBuilt.click({ clickCount: 3 });\nawait linkYearBuilt.type(property.yearBuilt);\nawait linkBathroomsTotal.click({ clickCount: 3 });\nawait linkBathroomsTotal.type(property.bathroomsTotal);\nawait linkBedroomsTotal.click({ clickCount: 3 });\nawait linkBedroomsTotal.type(property.bedroomsTotal);\nawait linkLivingArea.click({ clickCount: 3 });\nawait linkLivingArea.type(property.livingArea);\nawait linkBuildingArea.click({ clickCount: 3 });\nawait linkBuildingArea.type(property.buildingArea);*/\nlinkSubmit.click();\nawait page.waitForSelector(propertyListSelector, {\n  visible: true,\n  timeout: 0\n});\nawait page.waitFor(3000);",
+            "err": {},
+            "isRoot": false,
+            "uuid": "8b4d3b7f-7c0c-41e3-9909-cf173a3a1f35",
+            "isHook": false,
+            "skipped": false
+          },
+          {
+            "title": "should edit property",
+            "fullTitle": "property tests should edit property",
+            "timedOut": false,
+            "duration": 20351,
+            "state": "passed",
+            "speed": "slow",
+            "pass": true,
+            "fail": false,
+            "pending": false,
+            "code": "const propertyListSelector = \"#property-list\";\nconst editLinkSelector = \"#property-edit-link\";\nconst formStreetSelector = \"#formStreet\";\nconst formHouseNumberSelector = \"#formHouseNumber\";\nconst formPostcodeSelector = \"#formPostcode\";\nconst formCityDistrictSelector = \"#formCityDistrict\";\nconst formCitySelector = \"#formCity\";\nconst formCountrySelector = \"#formCountry\";\nconst formYearBuiltSelector = \"#formYearBuilt\";\nconst formYearAlteredSelector = \"#formYearAltered\";\nconst formBathroomsTotalSelector = \"#formBathroomsTotal\";\nconst formBedroomsTotalSelector = \"#formBedroomsTotal\";\nconst formLivingAreaSelector = \"#formLivingArea\";\nconst formBuildingAreaSelector = \"#formBuildingArea\";\nconst submitButtonSelector = \"#property-submit\";\nconst property = generateProperty();\nconst linkEdit = await page.$(editLinkSelector);\nawait linkEdit.click();\nconst linkStreet = await page.$(formStreetSelector);\nconst linkHouseNumber = await page.$(formHouseNumberSelector);\nconst linkPostcode = await page.$(formPostcodeSelector);\nconst linkCityDistrict = await page.$(formCityDistrictSelector);\nconst linkCity = await page.$(formCitySelector);\nconst linkCountry = await page.$(formCountrySelector);\nconst linkYearBuilt = await page.$(formYearBuiltSelector);\nconst linkYearAltered = await page.$(formYearAlteredSelector);\nconst linkBathroomsTotal = await page.$(formBathroomsTotalSelector);\nconst linkBedroomsTotal = await page.$(formBedroomsTotalSelector);\nconst linkLivingArea = await page.$(formLivingAreaSelector);\nconst linkBuildingArea = await page.$(formBuildingAreaSelector);\nconst linkSubmit = await page.$(submitButtonSelector);\nawait linkStreet.click({ clickCount: 3 });\nawait linkStreet.type(property.address.street);\nawait linkHouseNumber.click({ clickCount: 3 });\nawait linkHouseNumber.type(property.address.house_number);\nawait linkPostcode.click({ clickCount: 3 });\nawait linkPostcode.type(property.address.postcode);\nawait linkCityDistrict.click({ clickCount: 3 });\nawait linkCityDistrict.type(property.address.city_district);\nawait linkCity.click({ clickCount: 3 });\nawait linkCity.type(property.address.city);\nawait linkCountry.click({ clickCount: 3 });\nawait linkCountry.type(property.address.country);\n/*\nawait linkYearAltered.click({ clickCount: 3 });\nawait linkYearAltered.type(property.yearAltered);\nawait linkYearBuilt.click({ clickCount: 3 });\nawait linkYearBuilt.type(property.yearBuilt);\nawait linkBathroomsTotal.click({ clickCount: 3 });\nawait linkBathroomsTotal.type(property.bathroomsTotal);\nawait linkBedroomsTotal.click({ clickCount: 3 });\nawait linkBedroomsTotal.type(property.bedroomsTotal);\nawait linkLivingArea.click({ clickCount: 3 });\nawait linkLivingArea.type(property.livingArea);\nawait linkBuildingArea.click({ clickCount: 3 });\nawait linkBuildingArea.type(property.buildingArea);*/\nlinkSubmit.click();\nawait page.waitForSelector(propertyListSelector, {\n  visible: true,\n  timeout: 0\n});\nawait page.waitFor(3000);",
+            "err": {},
+            "isRoot": false,
+            "uuid": "aa6671ed-e827-4003-9e58-acb41b08dda2",
+            "isHook": false,
+            "skipped": false
+          }
+        ],
+        "suites": [],
+        "passes": [
+          "bc8103ef-48eb-4069-ba44-3712e2996b96",
+          "8b4d3b7f-7c0c-41e3-9909-cf173a3a1f35",
+          "aa6671ed-e827-4003-9e58-acb41b08dda2"
+        ],
+        "failures": [],
+        "pending": [],
+        "skipped": [],
+        "duration": 45512,
+        "root": false,
+        "rootEmpty": false,
+        "_timeout": 0
+      },
+      {
+        "uuid": "14b00ba7-bc56-48f6-bdce-171ce3990640",
+        "title": "user tests",
+        "fullFile": "C:\\Users\\Nykolay Savin\\WebstormProjects\\property-express-app\\test\\test\\users.spec.js",
+        "file": "\\test\\users.spec.js",
+        "beforeHooks": [
+          {
+            "title": "\"before all\" hook",
+            "fullTitle": "user tests \"before all\" hook",
+            "timedOut": false,
+            "duration": 2481,
+            "pass": false,
+            "fail": false,
+            "pending": false,
+            "code": "page = await browser.newPage();\nawait page.goto(\"http://localhost:3000\");\nawait page.setViewport({ width: 1920, height: 1040 });\nconst link = \"a.nav-link\";\nlinks = await page.$$(link);\nawait links[0].click();",
+            "err": {},
+            "isRoot": false,
+            "uuid": "e2281491-5213-44a8-ad95-239a8535f48c",
+            "isHook": true,
+            "skipped": false
+          }
+        ],
+        "afterHooks": [
+          {
+            "title": "\"after all\" hook",
+            "fullTitle": "user tests \"after all\" hook",
+            "timedOut": false,
+            "duration": 152,
+            "pass": false,
+            "fail": false,
+            "pending": false,
+            "code": "await page.close();",
+            "err": {},
+            "isRoot": false,
+            "uuid": "d8266171-e17b-4ea0-97a2-7ad6e6d31f4f",
+            "isHook": true,
+            "skipped": false
+          }
+        ],
+        "tests": [
+          {
+            "title": "should list users",
+            "fullTitle": "user tests should list users",
+            "timedOut": false,
+            "duration": 3513,
+            "state": "passed",
+            "speed": "slow",
+            "pass": true,
+            "fail": false,
+            "pending": false,
+            "code": "const userListSelector = \"#user-list\";\nawait page.waitForSelector(userListSelector, { visible: true, timeout: 0 });\nawait page.waitFor(3000);",
+            "err": {},
+            "isRoot": false,
+            "uuid": "6db714d7-2a24-409e-a741-08676e340ce7",
+            "isHook": false,
+            "skipped": false
+          },
+          {
+            "title": "should create user",
+            "fullTitle": "user tests should create user",
+            "timedOut": false,
+            "duration": 17697,
+            "state": "passed",
+            "speed": "slow",
+            "pass": true,
+            "fail": false,
+            "pending": false,
+            "code": "const userListSelector = \"#user-list\";\nconst createLinkSelector = \"#user-create-link\";\nconst formFirstNameSelector = \"#formFirstName\";\nconst formLastNameSelector = \"#formLastName\";\nconst formEmailSelector = \"#formEmail\";\nconst formPhoneSelector = \"#formPhone\";\nconst submitButtonSelector = \"#user-submit\";\nconst user = generateUser();\nconst linkCreate = await page.$(createLinkSelector);\nawait linkCreate.click();\nconst linkFirstName = await page.$(formFirstNameSelector);\nconst linkLastName = await page.$(formLastNameSelector);\nconst linkEmail = await page.$(formEmailSelector);\nconst linkPhone = await page.$(formPhoneSelector);\nconst linkSubmit = await page.$(submitButtonSelector);\nawait linkEmail.click({ clickCount: 3 });\nawait linkEmail.type(user.email);\nawait linkFirstName.click({ clickCount: 3 });\nawait linkFirstName.type(user.firstName);\nawait linkLastName.click({ clickCount: 3 });\nawait linkLastName.type(user.lastName);\nawait linkPhone.click({ clickCount: 3 });\nawait linkPhone.type(user.phone);\nlinkSubmit.click();\nawait page.waitForSelector(userListSelector, { visible: true, timeout: 0 });\nawait page.waitFor(3000);",
+            "err": {},
+            "isRoot": false,
+            "uuid": "761e37e7-fab0-4cb8-bf39-fe41f6f0e9d4",
+            "isHook": false,
+            "skipped": false
+          },
+          {
+            "title": "should edit user",
+            "fullTitle": "user tests should edit user",
+            "timedOut": false,
+            "duration": 18092,
+            "state": "passed",
+            "speed": "slow",
+            "pass": true,
+            "fail": false,
+            "pending": false,
+            "code": "const userListSelector = \"#user-list\";\nconst editLinkSelector = \"#user-edit-link\";\nconst formFirstNameSelector = \"#formFirstName\";\nconst formLastNameSelector = \"#formLastName\";\nconst formEmailSelector = \"#formEmail\";\nconst formPhoneSelector = \"#formPhone\";\nconst submitButtonSelector = \"#user-submit\";\nconst user = generateUser();\nconst linkEdit = await page.$(editLinkSelector);\nawait linkEdit.click();\nconst linkFirstName = await page.$(formFirstNameSelector);\nconst linkLastName = await page.$(formLastNameSelector);\nconst linkEmail = await page.$(formEmailSelector);\nconst linkPhone = await page.$(formPhoneSelector);\nconst linkSubmit = await page.$(submitButtonSelector);\nawait linkEmail.click({ clickCount: 3 });\nawait linkEmail.type(user.email);\nawait linkFirstName.click({ clickCount: 3 });\nawait linkFirstName.type(user.firstName);\nawait linkLastName.click({ clickCount: 3 });\nawait linkLastName.type(user.lastName);\nawait linkPhone.click({ clickCount: 3 });\nawait linkPhone.type(user.phone);\nlinkSubmit.click();\nawait page.waitForSelector(userListSelector, { visible: true, timeout: 0 });\nawait page.waitFor(3000);",
+            "err": {},
+            "isRoot": false,
+            "uuid": "7d145cb4-b671-4817-8121-17e8136ed409",
+            "isHook": false,
+            "skipped": false
+          }
+        ],
+        "suites": [],
+        "passes": [
+          "6db714d7-2a24-409e-a741-08676e340ce7",
+          "761e37e7-fab0-4cb8-bf39-fe41f6f0e9d4",
+          "7d145cb4-b671-4817-8121-17e8136ed409"
+        ],
+        "failures": [],
+        "pending": [],
+        "skipped": [],
+        "duration": 39302,
+        "root": false,
+        "rootEmpty": false,
+        "_timeout": 0
+      }
+    ],
+    "passes": [],
+    "failures": [],
+    "pending": [],
+    "skipped": [],
+    "duration": 0,
+    "root": true,
+    "rootEmpty": true,
+    "_timeout": 0
+  },
+  "copyrightYear": 2020
+}

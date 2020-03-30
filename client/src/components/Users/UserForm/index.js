@@ -83,7 +83,7 @@ const UserForm = ({
           {get(errors, "phone")}
         </Form.Control.Feedback>
       </Form.Group>
-      <Button variant="primary" type="submit" className="mt-3 btn-focal btn-lg">
+      <Button id='user-submit' variant="primary" type="submit" className="mt-3 btn-focal btn-lg">
         Save Changes
       </Button>
     </Form>

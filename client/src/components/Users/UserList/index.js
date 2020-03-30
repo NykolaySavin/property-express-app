@@ -14,11 +14,11 @@ const UserList = () => {
     getUsers();
   };
   return (
-    <Container>
+    <Container id="user-list">
       {error && <Error error={error} />}
       <Row>
         <Col>
-          <Link to={ROUTES.USERS_CREATE.as()}>
+          <Link id="user-create-link" to={ROUTES.USERS_CREATE.as()}>
             <Button className="btn-focal btn-lg">Add new</Button>
           </Link>
         </Col>

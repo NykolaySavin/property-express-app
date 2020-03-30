@@ -22,6 +22,8 @@ const SelectInput = ({
         setLoading(false);
         if (result.data) {
           setData(result.data);
+          if (result.data.length > 0 && onChange && initialValue.length === 0)
+            onChange(name, result.data[0].id);
         } else {
           setData([]);
         }

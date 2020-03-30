@@ -14,11 +14,11 @@ const PropertyList = () => {
     getProperties();
   };
   return (
-    <Container>
+    <Container id='property-list'>
       {error && <Error error={error} />}
       <Row>
         <Col>
-          <Link to={ROUTES.PROPERTIES_CREATE.as()}>
+          <Link id='property-create-link' to={ROUTES.PROPERTIES_CREATE.as()}>
             <Button className="btn-focal btn-lg">Add new</Button>
           </Link>
         </Col>

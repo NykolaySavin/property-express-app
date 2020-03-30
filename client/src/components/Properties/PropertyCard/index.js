@@ -26,8 +26,8 @@ const PropertyCard = ({ property, update }) => {
       {error && <Error error={error} />}
       <PropertyInfo property={property} />
       <Row>
-        <Col xs={12} sm={12} lg={4} md={4}>
-          <Link to={ROUTES.PROPERTIES_EDIT.as({ propertyId: property.id })}>
+        <Col  xs={12} sm={12} lg={4} md={4}>
+          <Link id="property-edit-link" to={ROUTES.PROPERTIES_EDIT.as({ propertyId: property.id })}>
             <Button className="btn-focal btn-lg">Edit</Button>
           </Link>
         </Col>

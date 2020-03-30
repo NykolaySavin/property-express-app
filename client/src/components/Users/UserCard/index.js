@@ -22,12 +22,15 @@ const UserCard = ({ user, update }) => {
     update();
   };
   return (
-    <Container className='border-dark border'>
+    <Container id="user-card" className="border-dark border">
       {error && <Error error={error} />}
       <UserInfo user={user} />
       <Row>
         <Col xs={12} sm={12} lg={4} md={4}>
-          <Link to={ROUTES.USERS_EDIT.as({ userId: user.id })}>
+          <Link
+            id="user-edit-link"
+            to={ROUTES.USERS_EDIT.as({ userId: user.id })}
+          >
             <Button className="btn-focal btn-lg">Edit</Button>
           </Link>
         </Col>

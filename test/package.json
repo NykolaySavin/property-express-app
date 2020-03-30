@@ -1,0 +1,25 @@
+{
+  "name": "puppeteer-mocha",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --timeout 0  ./test/bootstrap.js --recursive test --reporter mochawesome"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^4.2.0",
+    "express": "^4.16.4",
+    "faker": "^4.1.0",
+    "local-web-server": "^2.6.0",
+    "lodash": "^4.17.11",
+    "mocha": "^5.2.0",
+    "mochawesome": "^3.1.0",
+    "node-cmd": "^3.0.0",
+    "opn": "^5.4.0",
+    "puppeteer": "^2.1.1",
+    "puppeteer-core": "^1.9.0"
+  }
+}
