@@ -1,0 +1,9 @@
+// Import entire base styling inc bootstrap
+@import "custom-inputs";
+//bootstrap
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/_breakpoints";
+@import "~bootstrap/scss/bootstrap";
+
+@import "scss/paper-dashboard";

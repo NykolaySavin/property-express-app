@@ -1,0 +1,65 @@
+
+.form-rounded {
+  border-radius: 1rem;
+}
+
+.dropzone-logo {
+  border-radius: 50%;
+  width: 180px;
+}
+
+.dropzone-preview {
+  border: 3px solid #dedede;
+  background: #f5f5f5;
+  text-align: center;
+  width: 150px;
+  height: 150px;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: initial;
+}
+
+.profile-image-preview {
+  width: 250px;
+  height: 250px;
+}
+
+.dropzone {
+}
+
+
+
+.rich-text-editor {
+  min-height: 280px;
+}
+
+.btn-focal {
+  width: 100%;
+  border-radius: 2em;
+}
+
+.btn-rounded {
+  border-radius: 2em;
+}
+
+.brand-missing {
+  .alert {
+    margin: 5em auto;
+    width: 400px;
+    text-align: center;
+  }
+}
+
+.nav-link {
+  // text-decoration: none;
+
+  // @include hover-focus {
+  //   text-decoration: underline;
+  // }
+  color: black;
+
+  &.active {
+  }
+}
+

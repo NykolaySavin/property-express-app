@@ -34,12 +34,64 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="users.html">Users</a>
+            <a class="nav-link" href="properties.html">properties</a>
           </li>
         </ul>
       </div>
     </nav>
-    <p>Properties</p>
+    <div id="editContainer">
+      <p><b>Edit property</b></p>
+      <table>
+        <tr>
+          <td><input type="hidden" id="editId" /></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>First Name:</td>
+          <td><input type="text" id="editFirstName" /></td>
+        </tr>
+        <tr>
+          <td>Last Name:</td>
+          <td><input type="text" id="editLastName" /></td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td><input type="text" id="editEmail" /></td>
+        </tr>
+        <tr>
+          <td>Phone:</td>
+          <td><input type="text" id="editPhone" /></td>
+        </tr>
+      </table>
+
+      <button id="editButton" class="button">Save</button>
+    </div>
+
+    <div id="createContainer">
+      <p><b>Add property</b></p>
+      <table>
+        <tr>
+          <td>First Name:</td>
+          <td><input type="text" id="createFirstName" /></td>
+        </tr>
+        <tr>
+          <td>Last Name:</td>
+          <td><input type="text" id="createLastName" /></td>
+        </tr>
+        <tr>
+          <td>Email:</td>
+          <td><input type="text" id="createEmail" /></td>
+        </tr>
+        <tr>
+          <td>Phone:</td>
+          <td><input type="text" id="createPhone" /></td>
+        </tr>
+      </table>
+
+      <button id="createButton" class="button">Save</button>
+    </div>
+
+    <div id="tableContainer"></div>
     <script
       src="https://code.jquery.com/jquery-3.4.1.js"
       integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -55,5 +107,155 @@
       integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
       crossorigin="anonymous"
     ></script>
+    <script type="text/javascript">
+      $(document).ready(function() {
+        getProperties();
+        $("#editButton").click(function(event) {
+          event.preventDefault();
+          editProperty();
+        });
+        $("#createButton").click(function(event) {
+          event.preventDefault();
+          createProperty();
+        });
+      });
+      function getProperties() {
+        $("#createContainer").css("display", "block");
+        $("#editContainer").css("display", "none");
+        $.ajax({
+          url: "/v1/properties",
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
+            writeResponse(data);
+          },
+          error: function(x, y, z) {
+            console.log("Error: " + x + "\n" + y + "\n" + z);
+          }
+        });
+      }
+      function createProperty() {
+        var property = {
+          firstName: $("#createFirstName").val(),
+          lastName: $("#createLastName").val(),
+          email: $("#createEmail").val(),
+          phone: $("#createPhone").val()
+        };
+        $.ajax({
+          url: "/v1/properties",
+          type: "POST",
+          data: JSON.stringify(property),
+          contentType: "application/json;charset=utf-8",
+          success: function(data) {
+            getproperties();
+          },
+          error: function(x, y, z) {
+            console.log("Error: " + x + "\n" + y + "\n" + z);
+          }
+        });
+      }
+      function deleteProperty(id) {
+        $.ajax({
+          url: "/v1/properties/" + id,
+          type: "DELETE",
+          contentType: "application/json;charset=utf-8",
+          success: function(data) {
+            getproperties();
+          },
+          error: function(x, y, z) {
+            console.log("Error: " + x + "\n" + y + "\n" + z);
+          }
+        });
+      }
+      function editProperty() {
+        var id = $("#editId").val();
+        var property = {
+          id: $("#editId").val(),
+          firstName: $("#editFirstName").val(),
+          lastName: $("#editLastName").val(),
+          email: $("#editEmail").val(),
+          phone: $("#editPhone").val()
+        };
+        $.ajax({
+          url: "/v1/properties/" + id,
+          type: "PUT",
+          data: JSON.stringify(property),
+          contentType: "application/json;charset=utf-8",
+          success: function(data) {
+            getproperties();
+          },
+          error: function(x, y, z) {
+            console.log("Error: " + x + "\n" + y + "\n" + z);
+          }
+        });
+      }
+      function writeResponse(properties) {
+        var strResult =
+          "<table class='table' id='tableContainer'>" +
+          "<tr>" +
+          "<th>FirstName</th>" +
+          "<th>LastName</th>" +
+          "<th>Email</th>" +
+          "<th>Phone</th>" +
+          "<th></th>" +
+          "</tr>";
+        $.each(properties, function(index, property) {
+          strResult +=
+            "<tr><td>" +
+            property.firstName +
+            "</td><td>" +
+            property.lastName +
+            "</td><td>" +
+            property.email +
+            "</td><td>" +
+            property.phone +
+            "</td><td>" +
+            "<a class='c' id='editItem' data-item='" +
+            property.id +
+            "' onclick='editItem(this);' >Edit</a>" +
+            " |  " +
+            "<a class='c' id='delItem' data-item='" +
+            property.id +
+            "' onclick='deleteItem(this);' >Delete</a></td>";
+          ("</tr>");
+        });
+        strResult += "</table>";
+        $("#tableContainer").html(strResult);
+      }
+      function deleteItem(el) {
+        var id = $(el).attr("data-item");
+        deleteProperty(id);
+      }
+      function editItem(el) {
+        var id = $(el).attr("data-item");
+        getProperty(id);
+      }
+      function showProperty(property) {
+        if (property != null) {
+          $("#createContainer").css("display", "none");
+          $("#editContainer").css("display", "block");
+          $("#editId").val(property.id);
+          $("#editFirstName").val(property.firstName);
+          $("#editLastName").val(property.lastName);
+          $("#editEmail").val(property.email);
+          $("#editPhone").val(property.phone);
+        } else {
+          console.log("This is no property");
+        }
+      }
+      function getProperty(id) {
+        $.ajax({
+          url: "/v1/properties/" + id,
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
+            showProperty(data);
+          },
+          error: function(x, y, z) {
+            console.log("Error: " + x + "\n" + y + "\n" + z);
+          }
+        });
+      }
+    </script>
   </body>
 </html>

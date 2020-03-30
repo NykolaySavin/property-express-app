@@ -29,7 +29,18 @@ module.exports.createProperty = {
         yearAltered: Joi.number()
           .max(new Date().getFullYear())
           .min(0)
-          .allow(null)
+          .allow(null),
+        address: Joi.object()
+          .keys({
+            street: Joi.string().required(),
+            house_number: Joi.string().required(),
+            city: Joi.string().required(),
+            country: Joi.string().required(),
+            city_district: Joi.string(),
+            postcode: Joi.string().required()
+          })
+          .required(),
+        ownerId: Joi.string().required()
       })
   }),
   controller: function createProperty(req, res) {
@@ -115,7 +126,16 @@ module.exports.updatePropertyById = {
         yearAltered: Joi.number()
           .max(new Date().getFullYear())
           .min(0)
-          .allow(null)
+          .allow(null),
+        address: Joi.object().keys({
+          street: Joi.string().required(),
+          house_number: Joi.string().required(),
+          city: Joi.string().required(),
+          country: Joi.string().required(),
+          city_district: Joi.string(),
+          postcode: Joi.string().required()
+        }),
+        ownerId: Joi.string()
       }),
     params: {
       propertyId: Joi.string().required()
