@@ -1,5 +1,6 @@
 const { transaction } = require("objection");
 const PropertyModel = require("../models/Property");
+const UserService = require("./UserService");
 const NotFoundError = require("../errors/NotFoundError");
 
 /**
@@ -56,6 +57,7 @@ exports.getProperties = function getProperties(filter) {
  * @return {PropertyModel}
  * */
 exports.createProperty = async function createProperty(property, expanded) {
+  if (property.ownerId) await UserService.getUserById(property.ownerId);
   if (expanded) {
     const options = {
       relate: [],
@@ -83,6 +85,7 @@ exports.updatePropertyById = async function updatePropertyById(
   property,
   expanded
 ) {
+  if (property.ownerId) await UserService.getUserById(property.ownerId);
   const q = await getPropertyById(propertyId);
   if (expanded) {
     const options = {

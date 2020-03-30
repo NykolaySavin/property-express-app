@@ -10,6 +10,7 @@
       integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
       crossorigin="anonymous"
     />
+    <link href="/static/css/main.c31ba30b.chunk.css" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -47,20 +48,56 @@
           <td></td>
         </tr>
         <tr>
-          <td>First Name:</td>
-          <td><input type="text" id="editFirstName" /></td>
+          <td>Street:</td>
+          <td><input type="text" id="editStreet" /></td>
         </tr>
         <tr>
-          <td>Last Name:</td>
-          <td><input type="text" id="editLastName" /></td>
+          <td>House number:</td>
+          <td><input type="text" id="editHouseNumber" /></td>
         </tr>
         <tr>
-          <td>Email:</td>
-          <td><input type="text" id="editEmail" /></td>
+          <td>Postcode:</td>
+          <td><input type="text" id="editPostcode" /></td>
         </tr>
         <tr>
-          <td>Phone:</td>
-          <td><input type="text" id="editPhone" /></td>
+          <td>City:</td>
+          <td><input type="text" id="editCity" /></td>
+        </tr>
+        <tr>
+          <td>City district:</td>
+          <td><input type="text" id="editDistrict" /></td>
+        </tr>
+        <tr>
+          <td>Country:</td>
+          <td><input type="text" id="editCountry" /></td>
+        </tr>
+        <tr>
+          <td>Living area:</td>
+          <td><input type="number" id="editLivingArea" /></td>
+        </tr>
+        <tr>
+          <td>Building area:</td>
+          <td><input type="number" id="editBuildingArea" /></td>
+        </tr>
+        <tr>
+          <td>Year built:</td>
+          <td><input type="number" id="editYearBuilt" /></td>
+        </tr>
+        <tr>
+          <td>Year altered:</td>
+          <td><input type="number" id="editYearAltered" /></td>
+        </tr>
+        <tr>
+          <td>Bathrooms total:</td>
+          <td><input type="number" id="editBathroomsTotal" /></td>
+        </tr>
+        <tr>
+          <td>Bedrooms total:</td>
+          <td><input type="number" id="editBedroomsTotal" /></td>
+        </tr>
+        <tr>
+          <td>Owner Id:</td>
+          <td><input type="text" id="editOwnerId" /></td>
         </tr>
       </table>
 
@@ -71,20 +108,56 @@
       <p><b>Add property</b></p>
       <table>
         <tr>
-          <td>First Name:</td>
-          <td><input type="text" id="createFirstName" /></td>
+          <td>Street:</td>
+          <td><input type="text" id="createStreet" /></td>
         </tr>
         <tr>
-          <td>Last Name:</td>
-          <td><input type="text" id="createLastName" /></td>
+          <td>House number:</td>
+          <td><input type="text" id="createHouseNumber" /></td>
         </tr>
         <tr>
-          <td>Email:</td>
-          <td><input type="text" id="createEmail" /></td>
+          <td>City:</td>
+          <td><input type="text" id="createCity" /></td>
         </tr>
         <tr>
-          <td>Phone:</td>
-          <td><input type="text" id="createPhone" /></td>
+          <td>Postcode:</td>
+          <td><input type="text" id="createPostcode" /></td>
+        </tr>
+        <tr>
+          <td>City district:</td>
+          <td><input type="text" id="createDistrict" /></td>
+        </tr>
+        <tr>
+          <td>Country:</td>
+          <td><input type="text" id="createCountry" /></td>
+        </tr>
+        <tr>
+          <td>Living area:</td>
+          <td><input type="number" id="createLivingArea" /></td>
+        </tr>
+        <tr>
+          <td>Building area:</td>
+          <td><input type="number" id="createBuildingArea" /></td>
+        </tr>
+        <tr>
+          <td>Year built:</td>
+          <td><input type="number" id="createYearBuilt" /></td>
+        </tr>
+        <tr>
+          <td>Year altered:</td>
+          <td><input type="number" id="createYearAltered" /></td>
+        </tr>
+        <tr>
+          <td>Bathrooms total:</td>
+          <td><input type="number" id="createBathroomsTotal" /></td>
+        </tr>
+        <tr>
+          <td>Bedrooms total:</td>
+          <td><input type="number" id="createBedroomsTotal" /></td>
+        </tr>
+        <tr>
+          <td>Owner Id:</td>
+          <td><input type="text" id="createOwnerId" /></td>
         </tr>
       </table>
 
@@ -136,10 +209,21 @@
       }
       function createProperty() {
         var property = {
-          firstName: $("#createFirstName").val(),
-          lastName: $("#createLastName").val(),
-          email: $("#createEmail").val(),
-          phone: $("#createPhone").val()
+          address: {
+            street: $("#createStreet").val(),
+            country: $("#createCountry").val(),
+            postcode: $("#createPostcode").val(),
+            city: $("#createCity").val(),
+            city_district: $("#createDistrict").val(),
+            house_number: $("#createHouseNumber").val()
+          },
+          yearBuilt: +$("#createYearBuilt").val(),
+          yearAltered: +$("#createYearAltered").val(),
+          bathroomsTotal: +$("#createBathroomsTotal").val(),
+          bedroomsTotal: +$("#createBedroomsTotal").val(),
+          livingArea: +$("#createLivingArea").val(),
+          buildingArea: +$("#createBuildingArea").val(),
+          ownerId: $("#createOwnerId").val()
         };
         $.ajax({
           url: "/v1/properties",
@@ -147,7 +231,7 @@
           data: JSON.stringify(property),
           contentType: "application/json;charset=utf-8",
           success: function(data) {
-            getproperties();
+            getProperties();
           },
           error: function(x, y, z) {
             console.log("Error: " + x + "\n" + y + "\n" + z);
@@ -160,7 +244,7 @@
           type: "DELETE",
           contentType: "application/json;charset=utf-8",
           success: function(data) {
-            getproperties();
+            getProperties();
           },
           error: function(x, y, z) {
             console.log("Error: " + x + "\n" + y + "\n" + z);
@@ -171,10 +255,21 @@
         var id = $("#editId").val();
         var property = {
           id: $("#editId").val(),
-          firstName: $("#editFirstName").val(),
-          lastName: $("#editLastName").val(),
-          email: $("#editEmail").val(),
-          phone: $("#editPhone").val()
+          address: {
+            street: $("#editStreet").val(),
+            country: $("#editCountry").val(),
+            postcode: $("#editPostcode").val(),
+            city: $("#editCity").val(),
+            city_district: $("#editDistrict").val(),
+            house_number: $("#editHouseNumber").val()
+          },
+          yearBuilt: +$("#editYearBuilt").val(),
+          yearAltered: +$("#editYearAltered").val(),
+          bathroomsTotal: +$("#editBathroomsTotal").val(),
+          bedroomsTotal: +$("#editBedroomsTotal").val(),
+          livingArea: +$("#editLivingArea").val(),
+          buildingArea: +$("#editBuildingArea").val(),
+          ownerId: $("#editOwnerId").val()
         };
         $.ajax({
           url: "/v1/properties/" + id,
@@ -182,7 +277,7 @@
           data: JSON.stringify(property),
           contentType: "application/json;charset=utf-8",
           success: function(data) {
-            getproperties();
+            getProperties();
           },
           error: function(x, y, z) {
             console.log("Error: " + x + "\n" + y + "\n" + z);
@@ -193,22 +288,51 @@
         var strResult =
           "<table class='table' id='tableContainer'>" +
           "<tr>" +
-          "<th>FirstName</th>" +
-          "<th>LastName</th>" +
-          "<th>Email</th>" +
-          "<th>Phone</th>" +
+          "<th>Id</th>" +
+          "<th>Street</th>" +
+          "<th>House number</th>" +
+          "<th>City</th>" +
+          "<th>City district</th>" +
+          "<th>Country</th>" +
+          "<th>Postcode</th>" +
+          "<th>Year built</th>" +
+          "<th>Year altered</th>" +
+          "<th>Bathrooms total</th>" +
+          "<th>Bedrooms total</th>" +
+          "<th>Living area</th>" +
+          "<th>Building area</th>" +
           "<th></th>" +
           "</tr>";
         $.each(properties, function(index, property) {
           strResult +=
             "<tr><td>" +
-            property.firstName +
+            property.id +
             "</td><td>" +
-            property.lastName +
+            property.address.street +
             "</td><td>" +
-            property.email +
+            property.address.house_number +
             "</td><td>" +
-            property.phone +
+            property.address.city +
+            "</td><td>" +
+            property.address.city_district +
+            "</td><td>" +
+            property.address.country +
+            "</td><td>" +
+            property.address.postcode +
+            "</td><td>" +
+            property.yearBuilt +
+            "</td><td>" +
+            property.yearAltered +
+            "</td><td>" +
+            property.bathroomsTotal +
+            "</td><td>" +
+            property.bedroomsTotal +
+            "</td><td>" +
+            property.livingArea +
+            "</td><td>" +
+            property.buildingArea +
+            "</td><td>" +
+            property.ownerId +
             "</td><td>" +
             "<a class='c' id='editItem' data-item='" +
             property.id +
@@ -235,10 +359,19 @@
           $("#createContainer").css("display", "none");
           $("#editContainer").css("display", "block");
           $("#editId").val(property.id);
-          $("#editFirstName").val(property.firstName);
-          $("#editLastName").val(property.lastName);
-          $("#editEmail").val(property.email);
-          $("#editPhone").val(property.phone);
+          $("#editStreet").val(property.address.street);
+          $("#editHouseNumber").val(property.address.house_number);
+          $("#editPostcode").val(property.address.postcode);
+          $("#editCity").val(property.address.city);
+          $("#editCountry").val(property.address.country);
+          $("#editDistrict").val(property.address.city_district);
+          $("#editYearAltered").val(property.yearAltered);
+          $("#editYearBuilt").val(property.yearBuilt);
+          $("#editBathroomsTotal").val(property.bathroomsTotal);
+          $("#editBedroomsTotal").val(property.bedroomsTotal);
+          $("#editLivingArea").val(property.livingArea);
+          $("#editBuildingArea").val(property.buildingArea);
+          $("#editOwnerId").val(property.ownerId);
         } else {
           console.log("This is no property");
         }

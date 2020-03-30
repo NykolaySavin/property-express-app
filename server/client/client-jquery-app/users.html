@@ -10,6 +10,7 @@
       integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
       crossorigin="anonymous"
     />
+    <link href="/static/css/main.c31ba30b.chunk.css" rel="stylesheet">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -193,6 +194,7 @@
         var strResult =
           "<table class='table' id='tableContainer'>" +
           "<tr>" +
+          "<th>Id</th>" +
           "<th>FirstName</th>" +
           "<th>LastName</th>" +
           "<th>Email</th>" +
@@ -202,6 +204,8 @@
         $.each(users, function(index, user) {
           strResult +=
             "<tr><td>" +
+            user.id +
+            "</td><td>" +
             user.firstName +
             "</td><td>" +
             user.lastName +
