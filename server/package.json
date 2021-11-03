@@ -42,7 +42,7 @@
     "rss-parser": "^3.7.3",
     "slug": "^1.1.0",
     "uuid": "^3.3.3",
-    "validator": "^11.1.0"
+    "validator": "^13.7.0"
   },
   "devDependencies": {
     "eslint": "^5.16.0",
